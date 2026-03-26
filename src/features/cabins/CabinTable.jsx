@@ -14,7 +14,7 @@ function CabinTable() {
   if (!cabins.length) return <Empty resourceName="cabins" />;
 
   // 1) FILTER
-  const filterValue = searchParams.get("discount") || "all";
+  const filterValue = searchParams.get("cabins-discount") || "all";
 
   let filteredCabins;
   if (filterValue === "all") filteredCabins = cabins;
@@ -24,7 +24,7 @@ function CabinTable() {
     filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
 
   // 2) SORT
-  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  const sortBy = searchParams.get("cabins-sortBy") || "startDate-asc";
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
   const sortedCabins = filteredCabins.sort(

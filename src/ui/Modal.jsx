@@ -46,9 +46,6 @@ const Button = styled.button`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
     color: var(--color-grey-500);
   }
 `;
@@ -76,9 +73,9 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-  const ref = useOutsideClick(close);
+  const ref = useOutsideClick(() => close()); // Close the modal when clicked outside
 
-  if (name !== openName) return null;
+  if (openName !== name) return null;
 
   return createPortal(
     <Overlay>
@@ -86,7 +83,6 @@ function Window({ children, name }) {
         <Button onClick={close}>
           <HiXMark />
         </Button>
-
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,

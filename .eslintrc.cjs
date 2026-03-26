@@ -29,7 +29,25 @@ module.exports = {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
-    ],
+        
+   
+  
+     ],"react/prop-types": "off",
     // You can add other custom rules if necessary
+    
+
+
+
   },
+  
+  "overrides": [
+    {
+      "files": [".jsx"], // Specify the file path
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
+
+
 }

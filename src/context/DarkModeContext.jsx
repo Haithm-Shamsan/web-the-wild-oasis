@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
+/* eslint-disable react/prop-types */
 
 const DarkModeContext = createContext();
 

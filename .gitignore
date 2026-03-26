@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+Thumbs.db
+.vscode/
+.idea/
+.env
+.env.*
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+coverage/

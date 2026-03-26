@@ -44,6 +44,7 @@ function Filter({ filterField, options }) {
     if (searchParams.get("page")) searchParams.set("page", 1);
 
     setSearchParams(searchParams);
+    console.log("salah",searchParams);
   }
 
   return (

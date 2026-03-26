@@ -6,7 +6,7 @@ function CabinTableOperations() {
   return (
     <TableOperations>
       <Filter
-        filterField="discount"
+        filterField="cabins-discount"
         options={[
           { value: "all", label: "All" },
           { value: "no-discount", label: "No discount" },
@@ -14,7 +14,7 @@ function CabinTableOperations() {
         ]}
       />
 
-      <SortBy
+      <SortBy sortFor='cabins-sortBy'
         options={[
           { value: "name-asc", label: "Sort by name (A-Z)" },
           { value: "name-desc", label: "Sort by name (Z-A)" },

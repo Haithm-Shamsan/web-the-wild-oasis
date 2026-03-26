@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
@@ -37,9 +38,13 @@ const Error = styled.span`
 `;
 
 function FormRow({ label, error, children }) {
+  // Check if children is a valid React element and has an id prop
+  const firstChild = React.Children.toArray(children)[0];
+  const id = firstChild?.props?.id;
+
   return (
     <StyledFormRow>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+      {label && <Label htmlFor={id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </StyledFormRow>

@@ -31,7 +31,7 @@ const StyledToggle = styled.button`
 
 const StyledList = styled.ul`
   position: fixed;
-
+list-style: none;
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
@@ -71,9 +71,10 @@ function Menus({ children }) {
   const [openId, setOpenId] = useState("");
   const [position, setPosition] = useState(null);
 
-  const close = () => setOpenId("");
-  const open = setOpenId;
 
+    const close = () => setOpenId("");
+    const open = setOpenId;
+  
   return (
     <MenusContext.Provider
       value={{ openId, close, open, position, setPosition }}

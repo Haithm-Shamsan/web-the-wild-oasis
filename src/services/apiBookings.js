@@ -1,8 +1,10 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 import { PAGE_SIZE } from "../utils/constants";
-
 export async function getBookings({ filter, sortBy, page }) {
+  console.log("Initial filter: ", filter);
+  console.log("Initial sortBy: ", sortBy);
+
   let query = supabase
     .from("bookings")
     .select(
@@ -10,15 +12,33 @@ export async function getBookings({ filter, sortBy, page }) {
       { count: "exact" }
     );
 
+  // Remove 'bookings-' prefix dynamically for filter and sortBy
+
+  console.log({filter});
+  const cleanSortBy = sortBy
+    ? {
+        ...sortBy,
+        field: sortBy.field.replace(/^bookings-/, ""), // Remove the 'bookings-' prefix
+      }
+    : null;
+
+  console.log("Cleaned filter: ", filter);
+  console.log("Cleaned sortBy: ", cleanSortBy);
+
   // FILTER
-  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+  if (filter) {
+    query = query[filter.method || "eq"](filter.field, filter.value);
+    console.log("Haythm",filter.field, filter.value);
+  }
 
   // SORT
-  if (sortBy)
-    query = query.order(sortBy.field, {
-      ascending: sortBy.direction === "asc",
+  if (cleanSortBy) {
+    query = query.order(cleanSortBy.field, {
+      ascending: cleanSortBy.direction === "asc",
     });
+  }
 
+  // Pagination
   if (page) {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
@@ -28,10 +48,11 @@ export async function getBookings({ filter, sortBy, page }) {
   const { data, error, count } = await query;
 
   if (error) {
-    console.error(error);
+    console.error("Error loading bookings: ", error);
     throw new Error("Bookings could not be loaded");
   }
 
+  console.log("Data: ", data);
   return { data, count };
 }
 
@@ -127,5 +148,33 @@ export async function deleteBooking(id) {
     console.error(error);
     throw new Error("Booking could not be deleted");
   }
+  return data;
+}
+
+
+
+export async function  createEditBooking(newBooking,id) {
+  
+
+
+  // 1. Create/edit bookings
+  let query = supabase.from("bookings")
+
+  // A) CREATE
+  if (!id) query = query.insert([ newBooking ]);
+
+  // B) EDIT
+  if (id) query = query.update(newBooking).eq("id", id);
+
+  const { data, error } = await query.select().single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be created");
+  }
+
+
+
+
   return data;
 }
