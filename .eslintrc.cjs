@@ -26,13 +26,7 @@ module.exports = {
     'react-refresh', // Vite-specific plugin for HMR
   ],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-        
-   
-  
-     ],"react/prop-types": "off",
+    'react-refresh/only-export-components': 'off',"react/prop-types": "off",
     // You can add other custom rules if necessary
     
 
