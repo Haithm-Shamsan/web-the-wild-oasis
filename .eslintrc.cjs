@@ -22,11 +22,8 @@ module.exports = {
       version: '18.2', // Specifying React version, from your cjs file
     },
   },
-  plugins: [
-    'react-refresh', // Vite-specific plugin for HMR
-  ],
-  rules: {
-    'react-refresh/only-export-components': 'off',"react/prop-types": "off",
+  plugins: [],
+  rules: {"react/prop-types": "off",
     // You can add other custom rules if necessary
     
 
